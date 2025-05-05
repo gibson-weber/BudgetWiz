@@ -1,0 +1,21 @@
+# Ignore everything in the Data folder except for .gitkeep
+Data/*
+!Data/.gitkeep
+
+# Ignore Categories and MonthlySpending
+MonthlySpending.xlsx
+Categories.csv
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore virtual environment folder
+.venv/
+
+# Ignore IDE-specific files (e.g., VS Code)
+.vscode/
+
+# Ignore system files (e.g., macOS and Windows)
+.DS_Store
+Thumbs.db
