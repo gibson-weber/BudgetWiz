@@ -29,15 +29,28 @@ def process_transactions(input_file, sheet_name):
     ############################################
 
     df = pd.read_csv(input_file)
-    df["Amount"] = df["Amount"].astype(float) * -1 # Make expenses positive
-    df = df[~df["Name"].str.lower().str.contains("payment")]  # Remove Payment records
+
+    # Credit/Debit
+    df["Credit"] = df["Credit"].astype(float) * -1 # Make Credit negative
+    df['Amount'] = df['Debit'].fillna(df['Credit'])
+
+    df = df[~df["Category"].str.lower().str.contains("payment")]  # Remove Payment records
+
+    # Drop Cols
+    df = df.drop(columns=["Posted Date", "Card No.", "Debit", "Credit", "Category"])
+
+    # Rename Cols
+    df.rename(columns={
+        'Description': 'Name',
+        'Transaction Date': 'Date',
+    }, inplace=True)
     
     # Drop the "Memo" column if it exists
     if "Memo" in df.columns:
         df.drop(columns=["Memo"], inplace=True)
 
     # Split Name col
-    df[["Name", "City", "State"]] = df["Name"].apply(split_transaction)
+    #df[["Name", "City", "State"]] = df["Name"].apply(split_transaction)
 
     # Clean Names
     df["Name"] = df["Name"].apply(clean_text)
@@ -74,7 +87,7 @@ def process_transactions(input_file, sheet_name):
     df["Name"] = df["Name"].apply(lambda name: next((key for key in categories if key.lower() in name.lower()), name))
 
     # Reorder transaction table cols
-    df = df[["Transaction", "Date", "Name", "Amount", "Category", "City", "State"]]
+    df = df[["Date", "Name", "Amount", "Category"]]
 
 
     ### Pivot Tables
@@ -336,7 +349,7 @@ def process_transactions(input_file, sheet_name):
     doughnut_chart.height, doughnut_chart.width = 12, 15
 
     # Add the chart to the worksheet
-    chart_cell = "J2"
+    chart_cell = "G2"
     ws.add_chart(doughnut_chart, chart_cell)
 
 
