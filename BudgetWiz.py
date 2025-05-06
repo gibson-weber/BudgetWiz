@@ -271,11 +271,11 @@ def process_transactions(input_file, sheet_name):
     accounting_format = '"$"* #,##0.00_);[Red]"$"* #,##0.00;"-";@'
     # Apply format to the amounts in the DataFrame
     for r_idx in range(2, len(df) + 3):  # For transaction table col E
-        ws.cell(row=r_idx, column=5).number_format = accounting_format  # Col 4 = E for Amount
+        ws.cell(row=r_idx, column=4).number_format = accounting_format  # Col 4 = E for Amount
 
     # Apply format to the total_pivot table amounts
     for r_idx in range(pivot_start_row + 1, pivot_start_row + len(pivot_total) + 3):  # For total_pivot table Amount col
-        ws.cell(row=r_idx, column=11).number_format = accounting_format  # Column 11 = K for Amount
+        ws.cell(row=r_idx, column=8).number_format = accounting_format  # Column 8 = H for Amount
 
     
     ### Autofit/Adjust Col/Row Size
@@ -295,11 +295,11 @@ def process_transactions(input_file, sheet_name):
 
     # Adjust column widths and row height
     Adjustment = 0.71 # Openpyxl is not exact
-    ws.column_dimensions['E'].width = 8 + Adjustment # Amount col
+    ws.column_dimensions['D'].width = 9 + Adjustment # Amount col
     ws.column_dimensions['K'].width = 10.14 + Adjustment # Amount col (pivot)
 
-    ws.column_dimensions['I'].width = 2 + Adjustment # between transaction and pivot tables
-    ws.column_dimensions['L'].width = 3 + Adjustment # between pivot tables
+    ws.column_dimensions['F'].width = 2 + Adjustment # between transaction and pivot tables
+    ws.column_dimensions['I'].width = 3 + Adjustment # between pivot tables
 
     #ws.column_dimensions['D'].width += 50
     
