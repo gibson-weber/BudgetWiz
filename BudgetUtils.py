@@ -7,7 +7,7 @@ import subprocess
 # Set file paths
 DATA_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Data")
 CATEGORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Categories.csv")
-EXCEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "MonthlySpending.xlsx")
+EXCEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "MonthlySpending.xlsm")
 
 
 def load_categories():

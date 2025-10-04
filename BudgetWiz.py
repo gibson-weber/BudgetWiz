@@ -375,4 +375,4 @@ if __name__ == "__main__":
     for csv_file, sheet_name in files_and_sheets:
         process_transactions(csv_file, sheet_name)
     
-    open_excel_file() # Open XLSX File
+    open_excel_file() # Open XLSM File
